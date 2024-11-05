@@ -12,7 +12,8 @@ export const onInstall: OnInstallHandler = async () => {
             <Heading>Improved Notifications Example</Heading>
             <Text>
               This Snap generates notifications with expanded UI. 
-              To try it, go to the Snap homepage.
+              To try it, go to the 
+              <Link href="metamask://snap/home">Snap homepage</Link>.
             </Text>
           </Section>
         </Box>

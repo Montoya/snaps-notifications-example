@@ -7,7 +7,7 @@
     "url": "https://github.com/Montoya/snaps-notifications-example.git"
   },
   "source": {
-    "shasum": "0oZWMLqPavyYYs8x8owkhyLHO84RvCBBOuTRaF5eX9U=",
+    "shasum": "wcaHgOLzDCDrd0rtBQIK1v0l2iK4jf+afPTvq+gTlNQ=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
