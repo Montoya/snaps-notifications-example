@@ -1,5 +1,5 @@
-import type { OnHomePageHandler, OnInstallHandler } from '@metamask/snaps-sdk';
-import { Box, Text, Section, Heading, Link } from '@metamask/snaps-sdk/jsx';
+import type { OnHomePageHandler, OnInstallHandler, OnUserInputHandler } from '@metamask/snaps-sdk';
+import { Box, Text, Section, Heading, Button } from '@metamask/snaps-sdk/jsx';
 
 export const onInstall: OnInstallHandler = async () => {
   await snap.request({
@@ -27,8 +27,9 @@ export const onHomePage: OnHomePageHandler = async () => {
     params: {
       ui: <Box>
             <Section>
-              <Heading>Hello, user!</Heading>
-              <Text>You have successfully arrived at my Snap homepage!</Text>
+              <Heading>Notifications test dashboard</Heading>
+              <Text>Click the button to generate a notification, then open the notifications menu to view it.</Text>
+              <Button name="notify">Generate notification</Button>
             </Section>
           </Box>
     }
@@ -37,3 +38,28 @@ export const onHomePage: OnHomePageHandler = async () => {
     id: interfaceId
   }
 };
+
+export const onUserInput: OnUserInputHandler = async ({id, event}) => { 
+  await snap.request({
+    method: "snap_notify",
+    params: {
+      type: "inApp",
+      message: "Check out the Minesweeper Snap!",
+      title: "Minesweeper Snap now available",
+      detailedView: <Box><Text>Content</Text></Box>,
+      footerLink: "https://montoya.github.io/minesweeper-snap/"
+    }
+  }); 
+  await snap.request({
+    method: "snap_updateInterface",
+    params: { 
+      id,
+      ui: <Box>
+            <Section>
+              <Heading>Notifications test dashboard</Heading>
+              <Text>You must have clicked the button...</Text>
+            </Section>
+          </Box>
+    }
+  }); 
+}
