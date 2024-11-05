@@ -1,43 +1,39 @@
-import type { OnRpcRequestHandler } from '@metamask/snaps-sdk';
-import { Box, Text, Bold } from '@metamask/snaps-sdk/jsx';
+import type { OnHomePageHandler, OnInstallHandler } from '@metamask/snaps-sdk';
+import { Box, Text, Section, Heading, Link } from '@metamask/snaps-sdk/jsx';
 
-/**
- * Handle incoming JSON-RPC requests, sent through `wallet_invokeSnap`.
- *
- * @param args - The request handler args as object.
- * @param args.origin - The origin of the request, e.g., the website that
- * invoked the snap.
- * @param args.request - A validated JSON-RPC request object.
- * @returns The result of `snap_dialog`.
- * @throws If the request method is not valid for this snap.
- */
-export const onRpcRequest: OnRpcRequestHandler = async ({
-  origin,
-  request,
-}) => {
-  switch (request.method) {
-    case 'hello':
-      return snap.request({
-        method: 'snap_dialog',
-        params: {
-          type: 'confirmation',
-          content: (
-            <Box>
-              <Text>
-                Hello, <Bold>{origin}</Bold>!
-              </Text>
-              <Text>
-                This custom confirmation is just for display purposes.
-              </Text>
-              <Text>
-                But you can edit the snap source code to make it do something,
-                if you want to!
-              </Text>
-            </Box>
-          ),
-        },
-      });
-    default:
-      throw new Error('Method not found.');
+export const onInstall: OnInstallHandler = async () => {
+  await snap.request({
+    method: "snap_dialog",
+    params: {
+      type: "alert",
+      content: (
+        <Box>
+          <Section>
+            <Heading>Improved Notifications Example</Heading>
+            <Text>
+              This Snap generates notifications with expanded UI. 
+              To try it, go to the Snap homepage.
+            </Text>
+          </Section>
+        </Box>
+      )
+    },
+  });
+};
+
+export const onHomePage: OnHomePageHandler = async () => {
+  const interfaceId = await snap.request({ 
+    method: "snap_createInterface",
+    params: {
+      ui: <Box>
+            <Section>
+              <Heading>Hello, user!</Heading>
+              <Text>You have successfully arrived at my Snap homepage!</Text>
+            </Section>
+          </Box>
+    }
+  }); 
+  return { 
+    id: interfaceId
   }
 };

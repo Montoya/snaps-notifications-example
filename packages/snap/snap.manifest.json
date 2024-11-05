@@ -1,27 +1,27 @@
 {
   "version": "0.1.0",
-  "description": "An example Snap written in TypeScript.",
-  "proposedName": "TypeScript Example",
+  "description": "Notifications showcase for MetaMask Snaps",
+  "proposedName": "Notifications Example",
   "repository": {
     "type": "git",
-    "url": "https://github.com/MetaMask/template-snap-monorepo.git"
+    "url": "https://github.com/Montoya/snaps-notifications-example.git"
   },
   "source": {
-    "shasum": "X9pobn7XT2CgX4T9N6gcQP09HZhRlnDzNPN562ACt+k=",
+    "shasum": "0oZWMLqPavyYYs8x8owkhyLHO84RvCBBOuTRaF5eX9U=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
-        "packageName": "snap",
+        "iconPath": "img/icon.svg",
+        "packageName": "improved-notifications-example",
         "registry": "https://registry.npmjs.org/"
       }
     }
   },
   "initialPermissions": {
+    "endowment:page-home": {},
+    "snap_notify": {},
     "snap_dialog": {},
-    "endowment:rpc": {
-      "dapps": true,
-      "snaps": false
-    }
+    "endowment:lifecycle-hooks": {}
   },
   "manifestVersion": "0.1"
 }
